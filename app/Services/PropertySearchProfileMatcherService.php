@@ -37,7 +37,7 @@ class PropertySearchProfileMatcherService
                 return false;
             }
 
-            $isMatch = true;
+            $isMatch = false;
             $searchProfile->searchFields->each(function ($value, $key) use ($property, &$isMatch) {
                 $propertyFieldValue = $property->fields->get($key);
                 if($propertyFieldValue && $propertyFieldValue){

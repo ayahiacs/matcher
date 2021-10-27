@@ -22,6 +22,7 @@ class SearchProfileFactory extends Factory
     public function definition()
     {
         return [
+            'id' => $this->faker->uuid(),
             'name' => $this->faker->name(),
             'propertyType' => $this->faker->uuid(),
             'searchFields' => collect()

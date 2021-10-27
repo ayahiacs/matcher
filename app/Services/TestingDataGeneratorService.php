@@ -20,7 +20,7 @@ class TestingDataGeneratorService
             'id' => 1,
             'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
             'fields' => collect([
-                "area" => "74",
+                "area" => "100",
                 "yearOfConstruction" => "2011",
                 "rooms" => "5",
                 "heatingType" => "gas",
@@ -68,8 +68,9 @@ class TestingDataGeneratorService
         $searchProfiles->push(SearchProfile::factory()->make([
             'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
             'searchFields' => collect([
-                "area" => "180",
+                "area" => [100, 200],
                 "yearOfConstruction" => "2011",
+                "heatingType" => 'gas'
             ])
         ]));
         $searchProfiles->push(SearchProfile::factory()->make([

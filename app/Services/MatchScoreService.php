@@ -108,9 +108,12 @@ class MatchScoreService
      */
     protected function calculateRangePoints($propertyFieldValue, array $searchField, &$matchScore)
     {
-        if ($propertyFieldValue >= $searchField[0] && $propertyFieldValue <= $searchField[1]) {
+        $lowerCondition = is_null($searchField[0]) ? true : $propertyFieldValue >= $searchField[0];
+        $upperCondition = is_null($searchField[1]) ? true : $propertyFieldValue <= $searchField[1];
+        if ($lowerCondition && $upperCondition) {
             $matchScore['score'] += $this->strictMatchPoints;
             $matchScore['strictMatchesCount']++;
+            return;
         } else {
             $lowerBound = $searchField[0] == null ? null : $searchField[0] - ($searchField[0] * $this->looseMatchFactor);
             $upperBound = $searchField[1] == null ? null : $searchField[1] + ($searchField[1] * $this->looseMatchFactor);

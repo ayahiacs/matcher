@@ -244,6 +244,70 @@ class MatchScoreServiceTest extends TestCase
         ], $matchScore);
     }
 
+    public function test_range_match_null_upper_bound()
+    {
+        $property = Property::factory()->make([
+            'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+            'fields' => collect([
+                "area" => "1000",
+                "yearOfConstruction" => "2011",
+                "rooms" => "5",
+                "heatingType" => "gas",
+                "parking" => true,
+                "returnActual" => "12.8",
+                "rent" => "3750"
+            ])
+        ]);
+        $serchProfile = SearchProfile::factory()->make([
+            'id' => '1',
+            'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+            'searchFields' => collect([
+                "area" => [100, null],
+            ])
+        ]);
+        $matchScoreService = new MatchScoreService($property, $serchProfile);
+
+        $matchScore = $matchScoreService->getMatchScore();
+        $this->assertEqualsCanonicalizing([
+            'searchProfileId' => 1,
+            'score' => 20,
+            'strictMatchesCount' => 1,
+            'looseMatchesCount' => 0
+        ], $matchScore);
+    }
+
+    public function test_range_match_null_lower_bound()
+    {
+        $property = Property::factory()->make([
+            'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+            'fields' => collect([
+                "area" => "251",
+                "yearOfConstruction" => "2011",
+                "rooms" => "5",
+                "heatingType" => "gas",
+                "parking" => true,
+                "returnActual" => "12.8",
+                "rent" => "3750"
+            ])
+        ]);
+        $serchProfile = SearchProfile::factory()->make([
+            'id' => '1',
+            'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+            'searchFields' => collect([
+                "area" => [null, 500],
+            ])
+        ]);
+        $matchScoreService = new MatchScoreService($property, $serchProfile);
+
+        $matchScore = $matchScoreService->getMatchScore();
+        $this->assertEqualsCanonicalizing([
+            'searchProfileId' => 1,
+            'score' => 20,
+            'strictMatchesCount' => 1,
+            'looseMatchesCount' => 0
+        ], $matchScore);
+    }
+
     public function test_match_boolean_field_hit()
     {
         $property = Property::factory()->make([

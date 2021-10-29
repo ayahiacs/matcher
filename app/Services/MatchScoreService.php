@@ -24,14 +24,14 @@ class MatchScoreService
     /**
      * how many points should be added to score in case of strict match
      *
-     * @var string
+     * @var integer
      */
     protected $strictMatchPoints;
 
     /**
      * how many points should be added to score in case of loose match
      *
-     * @var string
+     * @var integer
      */
     protected $looseMatchPoints;
 
@@ -39,7 +39,7 @@ class MatchScoreService
      * a factor of bounds if searchField has range
      * example if factore is .25 and range is [100,200] loose match should go for [75, 250]
      *
-     * @var string
+     * @var float 
      */
     protected $looseMatchFactor;
 
@@ -72,8 +72,9 @@ class MatchScoreService
 
         foreach ($this->searchProfile->searchFields as $key => $searchField) {
             $propertyFieldValue = $this->property->fields->get($key);
-            if (!$propertyFieldValue) {
-                return;
+            if (is_null($propertyFieldValue)) {
+                $matchScore['score'] = 0;
+                break;
             }
             if (is_array($searchField)) {
                 $this->calculateRangePoints($propertyFieldValue, $searchField, $matchScore);
@@ -82,8 +83,10 @@ class MatchScoreService
                 }
             } else if (is_scalar($searchField) && $searchField == $propertyFieldValue) {
                 $matchScore['score'] += $this->strictMatchPoints;
+                \Log::info('hit ' . $searchField . ' ' . $propertyFieldValue . $matchScore['score']);
                 $matchScore['strictMatchesCount']++;
             } else {
+                \Log::info('miss ' . $searchField . ' ' . $propertyFieldValue);
                 $matchScore['score'] = 0;
                 break;
             }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PropertySearchProfileMatcherService;
+use App\Services\MatchService;
 use App\Services\TestingDataGeneratorService;
-use Illuminate\Http\Request;
 
 class MatchController extends Controller
 {
@@ -13,7 +12,7 @@ class MatchController extends Controller
 
     function __construct(TestingDataGeneratorService $testingDataGenerator)
     {
-        // generate some data
+        // generate some data for POC
         $this->properties = $testingDataGenerator->generateProperties();
         $this->searchProfiles = $testingDataGenerator->generateSearchProfiles();
     }
@@ -31,7 +30,7 @@ class MatchController extends Controller
             return response()->json(['message' => 'Not found.'], 404);
         }
 
-        $matcher = new PropertySearchProfileMatcherService($property, $this->searchProfiles);
+        $matcher = new MatchService($property, $this->searchProfiles);
 
         $matches = $matcher->getMatchesCollection();
 

@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Property;
 use Illuminate\Support\Collection;
 
-class PropertySearchProfileMatcherService
+class MatchService
 {
     protected Property $property;
     protected Collection $searchProfiles;

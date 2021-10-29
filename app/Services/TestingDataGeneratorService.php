@@ -16,36 +16,19 @@ class TestingDataGeneratorService
     {
         $properties = collect();
 
-        $properties->push(
-            Property::factory()->make([
-                'id' => 1,
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
-                'fields' => collect([
-                    "area" => "75",
-                    "yearOfConstruction" => "2011",
-                    "rooms" => "5",
-                    "heatingType" => "gas",
-                    "parking" => true,
-                    "returnActual" => "12.8",
-                    "rent" => "3750"
-                ])
-            ]),
-            Property::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-222222222222',
-            ]),
-            Property::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-222222222222',
-            ]),
-            Property::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-333333333333',
-            ]),
-            Property::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-333333333333',
-            ]),
-            Property::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-333333333333',
+        $properties->push(Property::factory()->make([
+            'id' => 1,
+            'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+            'fields' => collect([
+                "area" => "100",
+                "yearOfConstruction" => "2011",
+                "rooms" => "5",
+                "heatingType" => "gas",
+                "parking" => true,
+                "returnActual" => "12.8",
+                "rent" => "3750"
             ])
-        );
+        ]));
 
         return $properties;
     }

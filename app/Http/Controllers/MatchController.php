@@ -18,6 +18,9 @@ class MatchController extends Controller
         $this->searchProfiles = $testingDataGenerator->generateSearchProfiles();
     }
 
+    /**
+     * List of matched search profile ids with score
+     */
     function match($propertyId)
     {
         $property = $this->properties->first(function ($property, $key) use ($propertyId) {
@@ -30,8 +33,8 @@ class MatchController extends Controller
 
         $matcher = new PropertySearchProfileMatcherService($property, $this->searchProfiles);
 
-        $matches = $matcher->getMatchedSearchProfiles();
+        $matches = $matcher->getMatchesCollection();
 
-        return response()->json($matches);
+        return response()->json($matches->values());
     }
 }

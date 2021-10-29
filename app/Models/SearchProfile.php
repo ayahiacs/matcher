@@ -10,6 +10,7 @@ class SearchProfile extends Model
     use HasFactory;
     
     protected $fillable = [
+        'id',
         'name',
         'propertyType',
         'searchFields'

@@ -9,6 +9,8 @@ class SearchProfile extends Model
 {
     use HasFactory;
     
+    protected $keyType = 'string';
+    
     protected $fillable = [
         'id',
         'name',

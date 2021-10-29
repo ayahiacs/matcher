@@ -44,7 +44,6 @@ class TestingDataGeneratorService
 
         $searchProfiles->push(
             SearchProfile::factory()->make([
-                'id' => 1,
                 'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
                 'searchFields' => collect([
                     "area" => [100, 200],
@@ -52,46 +51,55 @@ class TestingDataGeneratorService
                 ])
             ]),
             SearchProfile::factory()->make([
+                'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111112',
+                'searchFields' => collect([
+                    "area" => "100",
+                ])
+            ]),
+            SearchProfile::factory()->make([
                 'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
-                'searchFields' => collect()
+                'searchFields' => collect([
+                    "area" => "180",
+                    "yearOfConstruction" => "2011",
+                ])
+            ]),
+            SearchProfile::factory()->make([
+                'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
+                'searchFields' => collect([
+                    "heatingType" => "gas",
+                    "parking" => true,
+                    "returnActual" => "12.8",
+                ])
             ]),
             SearchProfile::factory()->make([
                 'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
                 'searchFields' => collect([
                     "area" => "180",
                     "yearOfConstruction" => "2011",
+                    "heatingType" => "gas",
+                    "parking" => true,
+                    "returnActual" => "12.8",    
                 ])
             ]),
             SearchProfile::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-222222222222',
+                'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
                 'searchFields' => collect([
                     "area" => "180",
                     "yearOfConstruction" => "2011",
+                    "parking" => true,
+                    "returnActual" => "12.8",
+                    "rent" => "3750"
                 ])
             ]),
             SearchProfile::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-222222222222',
+                'propertyType' => '5d5922ce-4372-4e7d-9ffd-111111111111',
                 'searchFields' => collect([
-                    "area" => "180",
-                    "yearOfConstruction" => "2011",
-                ])
-            ]),
-            SearchProfile::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-222222222222',
-                'searchFields' => collect([
-                    "area" => "180",
-                    "yearOfConstruction" => "2011",
-                ])
-            ]),
-            SearchProfile::factory()->make([
-                'propertyType' => '5d5922ce-4372-4e7d-9ffd-333333333333',
-                'searchFields' => collect([
-                    "area" => "180",
-                    "yearOfConstruction" => "2011",
+                    "area" => [50, 95],
+                    "rent" => [4000, 5000]
                 ])
             ])
         );
-
+        
         return $searchProfiles;
     }
 }

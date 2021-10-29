@@ -13,13 +13,13 @@ class MatchController extends Controller
 
     function __construct(TestingDataGeneratorService $testingDataGenerator)
     {
-        $this->searchProfiles;
+        // generate some data
         $this->properties = $testingDataGenerator->generateProperties();
         $this->searchProfiles = $testingDataGenerator->generateSearchProfiles();
     }
 
     /**
-     * List of matched search profile ids with score
+     * List of matched search profile ids with score, strict and loose match count
      */
     function match($propertyId)
     {

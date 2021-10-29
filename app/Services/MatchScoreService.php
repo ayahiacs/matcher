@@ -83,10 +83,8 @@ class MatchScoreService
                 }
             } else if (is_scalar($searchField) && $searchField == $propertyFieldValue) {
                 $matchScore['score'] += $this->strictMatchPoints;
-                \Log::info('hit ' . $searchField . ' ' . $propertyFieldValue . $matchScore['score']);
                 $matchScore['strictMatchesCount']++;
             } else {
-                \Log::info('miss ' . $searchField . ' ' . $propertyFieldValue);
                 $matchScore['score'] = 0;
                 break;
             }

@@ -34,6 +34,6 @@ class MatchController extends Controller
 
         $matches = $matcher->getMatchesCollection();
 
-        return response()->json($matches->values());
+        return response()->json(['data' => $matches->values()]);
     }
 }
